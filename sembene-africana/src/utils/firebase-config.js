@@ -1,6 +1,8 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+// import {PrivateRoute} from './privateRoute';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyADCYF4nJCTIQYlGvJ87m3sO3NyBYcKBL0",

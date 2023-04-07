@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { firebaseAuth } from '../utils/firebase-config';
 import { React, useState } from 'react';
 import styled from "styled-components";
@@ -28,7 +28,14 @@ export default function Signup() {
 
     onAuthStateChanged(firebaseAuth, (currentUser) => {
         if (currentUser) navigate('/');
+
     });
+    // const auth = getAuth();
+    // signOut(auth).then(() =>
+    //   .catch((error) => {
+    // });
+    // )
+
 
     return (
         <Container showPassword={showPassword}>
@@ -37,12 +44,12 @@ export default function Signup() {
                 <Header login />
                 <div>
                     <div>
-                        <h1>Made In Africa - Films & TV Shows</h1>
-                        <h4>Watch anywhere . Any time</h4>
-                        <h6>Become a member and start watching. Enter your email
+                        <h1>Movies Made In Africa</h1>
+                        <h4>Exclusive Content . For everyone</h4>
+                        <h6>Enter your email and watch Exclusive Content
                         </h6>
                     </div>
-                    <div className>
+                    <div>
                         <input type='email' placeholder='Email Address' name='email' value={formValues.email}
                             onChange={(e) => setFormValues({
                                 ...formValues, [e.target.name]: e.target.value,
