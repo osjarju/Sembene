@@ -7,22 +7,28 @@ import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getGenres } from '../store';
-
+import { fetchMovies, getGenres } from '../store';
+import Slider from '../components/slider/Slider';
 
 export default function Sembene() {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
 
-  const genres = useSelector((state) => state.sembene.genres)
-  const trendy = useSelector((state) => state.sembene.movies)
-  console.log(trendy)
-
+  const genresLoaded = useSelector((state) => state.sembene.genresLoaded);
+  const movies = useSelector((state) => state.sembene.movies)
   const dispatch = useDispatch();
+
+  // const trendy = useSelector((state) => state.sembene.movies)
+  // console.log(trendy)
 
   useEffect(() => {
     dispatch(getGenres());
-  }, [])
+  }, []);
+
+  //FETCH MOVIES IF GENRES ARE LOADED
+  useEffect(() => {
+    if (genresLoaded) dispatch(fetchMovies({ type: 'all' }));
+  });
 
   //WINDOW SCROLL FUNCTIONALITY
   window.onscroll = () => {
@@ -47,9 +53,10 @@ export default function Sembene() {
             <button className='flex j-center a-center'>
               <AiOutlineInfoCircle /> Learn More </button>
           </div>
-          {genres.map((item, index) => <li key={index}>{item.name}</li>)}
+          {/* {genres.map((item, index) => <li key={index}>{item.name}</li>)} */}
         </div>
       </div>
+      <Slider movies={movies} />
     </Container>
   );
 }
