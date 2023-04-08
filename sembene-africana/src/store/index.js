@@ -15,7 +15,8 @@ const initialState = {
 const TMDB_BASE_URL = "https://api.themoviedb.org/3/";
 
 export const getGenres = createAsyncThunk('sembene/genres', async () => {
-    const { data: { genres },
+    const {
+        data: { genres },
     } = await axios.get(`${TMDB_BASE_URL}/genre/movie/list?api_key=${API_KEY}`
     );
     console.log(genres);
@@ -44,9 +45,10 @@ const createArrayFromRawData = (array, moviesArray, genres) => {
 const getRawData = async (api, genres, paging) => {
     const moviesArray = [];
     for (let i = 1; moviesArray.length < 60 && i < 10; i++) {
-        const { data: { results },
+        const {
+            data: { results },
         } = await axios.get(
-            `${api}${paging ? `&page=${i}` : ''}`
+            `${api}${paging ? `&page=${i}` : ""}`
         );
         createArrayFromRawData(results, moviesArray, genres);
         return moviesArray;
@@ -56,12 +58,11 @@ const getRawData = async (api, genres, paging) => {
 //FETCH MOVIES
 export const fetchMovies = createAsyncThunk(
     'sembene/trending', async ({ type }, thunkApi) => {
-        const { sembene: { genres } } = thunkApi.getState();
+        const { sembene: { genres }, } = thunkApi.getState();
         //GET MOVIE TYPES TRENDING BY WEEK
-        const data = getRawData(`${TMDB_BASE_URL}/trending/${type}week?api_key=${API_KEY}`,
+        return getRawData(`${TMDB_BASE_URL}trending/${type}/week?api_key=${API_KEY}`,
             genres, true
         );
-        console.log(data)
     }
 );
 

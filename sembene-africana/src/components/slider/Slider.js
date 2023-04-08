@@ -1,11 +1,12 @@
 import React from 'react';
 import CardSlider from '../cardslides/CardSlider';
-
+// import Sembene from '../../pages/Sembene';
 
 export default function Slider({ movies }) {
     const getMoviesFromRange = (from, to) => {
         return movies.slice(from, to);
     };
+    // if (!movies) return null
 
     //RETURN TEN MOVIES ON EACH CARD
     return (

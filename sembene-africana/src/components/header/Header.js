@@ -9,8 +9,8 @@ export default function Header(props) {
 
     // const Header = () => {
     return (
-        <Container>
-            <div>
+        <Container className='flex a-center j-between'>
+            <div className='logo'>
                 <img src={logo} alt='logo' />
             </div>
             <button onClick={() => navigate(props.login ? '/login' : '/signup')}>
@@ -20,6 +20,18 @@ export default function Header(props) {
     );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+padding: 0 4rem;
 
-// export default Header;
+.logo {
+    img {
+        height: 20rem;
+    }
+}
+
+button {
+
+}
+
+`;
+
