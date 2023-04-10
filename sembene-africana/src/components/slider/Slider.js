@@ -6,7 +6,6 @@ export default function Slider({ movies }) {
     const getMoviesFromRange = (from, to) => {
         return movies.slice(from, to);
     };
-    // if (!movies) return null
 
     //RETURN TEN MOVIES ON EACH CARD
     return (

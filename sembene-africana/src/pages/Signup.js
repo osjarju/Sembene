@@ -30,11 +30,6 @@ export default function Signup() {
         if (currentUser) navigate('/');
 
     });
-    // const auth = getAuth();
-    // signOut(auth).then(() =>
-    //   .catch((error) => {
-    // });
-    // )
 
 
     return (
@@ -77,7 +72,6 @@ export default function Signup() {
 
 const Container = styled.div`
 position: relative;
-
 .content {
     position: absolute;
     top: 0;
@@ -87,7 +81,6 @@ position: relative;
     width: 100vw;
     display: grid;
     grid-template-rows: 15vh 85vh;
-
     .body {
         gap: 1rem;
         .text {
@@ -99,43 +92,38 @@ position: relative;
             }
         }
         .form {
-            display:grid;
-            grid-template-columns:${({ showPassword }) =>
-        showPassword ? '1fr 1fr' : '2fr 1fr'};
-            width:60%;
-            
+            display: grid;
+            grid-template-columns:${({ showPassword }) => showPassword ? '1fr 1fr' : '2fr 1fr'};
+            width: 60%;
             input {
                 color: black;
                 border: none;
                 padding: 1.5rem;
                 font-size: 1.2rem;
                 border: 1px solid black;
-
                 &:focus {
                     outline: none;
                 }
             }
-button {
-    padding: 0.5rem 1rem;
-    background-color: #e50914;
-    border: none;
-    cursor: pointer;
-    color: white;
-   
-    font-weight: bolder;
-    font-size: 1.05rem;
-}
-}
-button {
-    padding: 0.5rem 1rem;
-    background-color: #e50914;
-    border: none;
-    cursor: pointer;
-    color: white;
-    border-radius: 0.2rem;
-    font-weight: bolder;
-    font-size: 1.05rem;
-}
-
+            button {
+            padding: 0.5rem 1rem;
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+            color: red;
+            font-weight: bolder;
+            font-size: 1.05rem;
+            }
+          }
+          button {
+            padding: 0.5rem 1rem;
+            background-color: orange;
+            border: none;
+            cursor: pointer;
+            color: red;
+            border-radius: 0.2rem;
+            font-weight: bolder;
+            font-size: 1.05rem;
+        }       
 `;
 

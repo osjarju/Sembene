@@ -51,8 +51,8 @@ const getRawData = async (api, genres, paging) => {
             `${api}${paging ? `&page=${i}` : ""}`
         );
         createArrayFromRawData(results, moviesArray, genres);
-        return moviesArray;
     }
+    return moviesArray;
 };
 
 //FETCH MOVIES
@@ -65,8 +65,16 @@ export const fetchMovies = createAsyncThunk(
         );
     }
 );
-
-//return getRawData(`${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`)
+//SORT MOVIES BY GENRE
+export const fetchDataByGenre = createAsyncThunk(
+    'sembene/GenreChoice', async ({ genre, type }, thunkApi) => {
+        const { sembene: { genres }, } = thunkApi.getState();
+        //GET MOVIE TYPES TRENDING BY WEEK
+        return getRawData(`${TMDB_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
+            genres
+        );
+    }
+);
 
 const SembeneSlice = createSlice({
     name: 'sembene',
@@ -77,6 +85,9 @@ const SembeneSlice = createSlice({
             state.genresLoaded = true;
         });
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+        builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
     },

@@ -22,16 +22,20 @@ export default function Header(props) {
 
 const Container = styled.div`
 padding: 0 4rem;
-
 .logo {
     img {
-        height: 20rem;
+        height: 12rem;
     }
 }
-
 button {
-
+    padding: 0.5rem 1rem;
+    background-color: orange;
+    border: none;
+    cursor: pointer;
+    color: red;
+    border-radius: 0.2rem;
+    font-weight: bolder;
+    font-size: 1.05rem;
 }
-
 `;
 

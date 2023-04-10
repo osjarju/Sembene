@@ -70,7 +70,7 @@ export default function Navbar({ isScrolled }) {
 
 const Container = styled.div`
 .scrolled {
-    background-color: black;
+    background-color: orange;
 }
 nav {
     position: sticky;
@@ -84,75 +84,73 @@ nav {
     align-items: center;
     transition: 0.3s ease-in-out;
     .left {
-        gap: 2rem;
-        .brand {
-            img {
-                height: 4rem;
-            }
-        }
-        .links {
-            list-style-type: none;
-            gap: 2rem;
-            li {
-                a {
-                    color:white;
-                    text-decoration: none;
-                }
-            }
+      gap: 2rem;
+      .brand {
+        img {
+          height: 12rem;
         }
     }
-    .right {
-        gap: 1rem;
-        button {
-            background-color: transparent:
-            border: none;
-            cursor: pointer;
-            &:focus {
-                outline: none;
-            }
-            svg {
-                color: #f34242;
-                font-size: 1.2rem;
-            }
+    .links {
+      list-style-type: none;
+      gap: 2rem;
+      li {
+        a {
+          color:white;
+          text-decoration: none;
         }
-        .search {
-            display: flex;
-            gap: 0.4rem;
-            align-items: center;
-            justify-content: center;
-            padding: 0.2rem;
-            padding-left: 0.5rem;
-
-            button {
-              background-color: transparent;
-              svg {
-              color: white;
-                  }
-            }
-            input {
-                width: 0;
-                opacity: 0;
-                visibility: hidden;
-                transition: 0.3s ease-in-out;
-                background-color: transparent;
-                border: none;
-                color: white;
-                &:focus {
-                    outline: none;
-                }
-            }
-        } 
-        .show-search {
-            border: 1px solid white;
-            background-color: rgba(0, 0, 0, 0.6);
-            input {
-                width: 100%;
-                opacity: 1;
-                visibility: visible;
-                padding; 0.3rem;
-            }
-        }
+      }
     }
+  }
+ .right {
+   gap: 1rem;
+   button {
+     background-color: transparent:
+     border: none;
+     cursor: pointer;
+     &:focus {
+         outline: none;
+     }
+  svg {
+    color: orange;
+    font-size: 1.2rem;
+    }
+  }
+  .search {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    padding-left: 0.5rem;
+    button {
+      background-color: transparent;
+      svg {
+        color: orange;
+        }
+      }
+      input {
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+        background-color: transparent;
+        border: none;
+        color: white;
+        &:focus {
+          outline: none;
+        }
+      }
+    } 
+    .show-search {
+      border: 1px solid white;
+      background-color: rgba(0, 0, 0, 0.6);
+      input {
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        padding; 0.3rem;
+      }
+    }
+  }
 }
-
 `;
