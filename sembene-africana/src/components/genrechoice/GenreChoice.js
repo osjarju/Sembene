@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { fetchDataByGenre } from '../../store';
 
 export default function GenreChoice({ genres, type }) {
-    const dispatch = useDispatch
+    const dispatch = useDispatch();
     return (
         <select className='flex' onChange={e => {
             dispatch(fetchDataByGenre({ genre: e.target.value, type }));

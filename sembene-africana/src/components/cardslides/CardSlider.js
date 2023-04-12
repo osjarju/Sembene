@@ -12,14 +12,16 @@ export default function CardSlider({ data, title }) {
 
     //HANDLE SLIDER BEHAVIOR/DIRECTION
     const handleDirection = (direction) => {
-        let distance = listRef.current.getBoundingClientRect().x - 70;
-        if (distance === 'left' && sliderPosition > 0) {
-            listRef.current.style.transform = `translateX(${230 + distance}px)`;
-            setSliderPosition(sliderPosition - 1);
+
+        if (direction === 'left') {
+            // listRef.current.style.transform = `translateX(${230 + distance}px)`;
+            // setSliderPosition(sliderPosition - 1);
+            listRef.current.scrollLeft -= 230
         }
-        if (distance === 'right' && sliderPosition < -4) {
-            listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-            setSliderPosition(sliderPosition + 1);
+        if (direction === 'right') {
+            // listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+            // setSliderPosition(sliderPosition + 1);
+            listRef.current.scrollLeft += 230
         }
     };
 
@@ -28,13 +30,13 @@ export default function CardSlider({ data, title }) {
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}>
             <h1>{title}</h1>
-            <div className='wrapper'>
+            <div className='wrapper' ref={listRef}>
                 <div className={`slider-action left
                  ${!showControls ? 'none' : ''} flex j-center a-center`}>
 
                     <AiOutlineLeft onClick={() => handleDirection('left')} />
                 </div>
-                <div className='flex slider' ref={listRef}>
+                <div className='flex slider' >
                     {data.map((movie, index) => {
                         return <Card movieData={movie} index={index} key={movie.id} />;
                     })}
@@ -57,12 +59,17 @@ h1 {
     margin-left: 50px;
 }
 .wrapper {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overflow: hidden;
+
     .slider {
         width: max-content;
         gap: 1rem;
         transform: translateX(0px);
         transition: 0.3s ease-in-out;
         margin-left: 50px;
+       
     }
     .slider-action {
         position: absolute;
@@ -85,9 +92,6 @@ h1 {
         .right {
             right: 0;
         }
-
     }
 }
-
-
 `;

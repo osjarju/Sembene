@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import Mebet from '../../assets/Mebet.mp4';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoPlayCircleSharp } from 'react-icons/io5';
 import { RiThumbUpFill, RiThumbDownFill } from 'react-icons/ri';
 import { BsCheck } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
+import onAuthStateChanged from 'react-router-dom';
+import { firebaseAuth } from '../utils/firebase-config';
+import axios from 'axios';
 
 function Card({ movieData, isliked = false }) {
     const [isHovered, setIsHovered] = useState(false);
-    const navigate = useNavigate;
+    const [email, setEmail] = useState(undefined);
+    const navigate = useNavigate();
+
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+        if (currentUser) setEmail(currentUser.eemail);
+        else navigate('/login');
+    });
+
+    const addToList = async () => {
+        try {
+            await axios.post('http://localhost:5000/api/user/add', { email, data: movieData })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     return <Container onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}>
@@ -37,8 +54,8 @@ function Card({ movieData, isliked = false }) {
                                 <RiThumbUpFill title='Like' />
                                 <RiThumbDownFill title='Dislike' />
                                 {isliked ? (
-                                    <BsCheck title='Remove Frrom List' />) :
-                                    (<AiOutlinePlus title='Add to my List' />
+                                    <BsCheck title='Remove From List' />) :
+                                    (<AiOutlinePlus title='Add to my List' onClick={addToList} />
                                     )}
                             </div>
                             <div className='info'>
@@ -66,7 +83,6 @@ position: relative;
 img {
     border-radius: 0.2rem;
     width: 100%;
-    c
     z-index: 10;
 }
 .hover {
@@ -117,7 +133,6 @@ img {
             transition: 0.3s ease-in-out;
             &:hover {
                 color: #b8b8b8;
-            
             }
         }
     }

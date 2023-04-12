@@ -21,10 +21,10 @@ export default function Header(props) {
 }
 
 const Container = styled.div`
-padding: 0 4rem;
+padding: 0 6rem;
 .logo {
     img {
-        height: 12rem;
+        height: 11rem;
     }
 }
 button {
@@ -37,5 +37,10 @@ button {
     font-weight: bolder;
     font-size: 1.05rem;
 }
+
+button:hover {
+    background-color: orange;
+    color: #ff4a02;
+  }
 `;
 

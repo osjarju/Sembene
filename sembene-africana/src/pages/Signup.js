@@ -44,7 +44,7 @@ export default function Signup() {
                         <h6>Enter your email and watch Exclusive Content
                         </h6>
                     </div>
-                    <div>
+                    <form>
                         <input type='email' placeholder='Email Address' name='email' value={formValues.email}
                             onChange={(e) => setFormValues({
                                 ...formValues, [e.target.name]: e.target.value,
@@ -52,7 +52,7 @@ export default function Signup() {
                             }
                         />
                         {showPassword && (
-                            <input type='password' placeholder='Password' name='password' value={formValues.password}
+                            <input type='password' placeholder='Create Password' name='password' value={formValues.password}
                                 onChange={(e) => setFormValues({
                                     ...formValues, [e.target.name]: e.target.value,
                                 })
@@ -62,7 +62,7 @@ export default function Signup() {
                         {!showPassword && (
                             <button onClick={() => SetShowPassword(true)}>Click Here</button>
                         )}
-                    </div>
+                    </form>
                     <button onClick={handleSignUp}>Sign Up</button>
                 </div>
             </div>
@@ -73,7 +73,7 @@ export default function Signup() {
 const Container = styled.div`
 position: relative;
 .content {
-    position: absolute;
+//     position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -91,16 +91,16 @@ position: relative;
                 padding: 0 25rem;
             }
         }
-        .form {
+        form {
             display: grid;
             grid-template-columns:${({ showPassword }) => showPassword ? '1fr 1fr' : '2fr 1fr'};
-            width: 60%;
+            width: 50%;
             input {
                 color: black;
                 border: none;
-                padding: 1.5rem;
+                padding: 1rem;
                 font-size: 1.2rem;
-                border: 1px solid black;
+                border: 1px solid orange;
                 &:focus {
                     outline: none;
                 }
@@ -116,7 +116,7 @@ position: relative;
             }
           }
           button {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 17.1rem;
             background-color: orange;
             border: none;
             cursor: pointer;
