@@ -7,72 +7,76 @@ import { RiThumbUpFill, RiThumbDownFill } from 'react-icons/ri';
 import { BsCheck } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BiChevronDown } from 'react-icons/bi';
-import onAuthStateChanged from 'react-router-dom';
-import { firebaseAuth } from '../utils/firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from '../../utils/firebase-config';
 import axios from 'axios';
 
-function Card({ movieData, isliked = false }) {
+export default function Card({ movieData, isliked = false }) {
     const [isHovered, setIsHovered] = useState(false);
     const [email, setEmail] = useState(undefined);
     const navigate = useNavigate();
 
+    //IF USER DOES NOT EXIST GO TO LOGIN PAGE
     onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) setEmail(currentUser.eemail);
+        if (currentUser) setEmail(currentUser.email);
         else navigate('/login');
     });
 
+    //ADD MOVIE TO MY LIST
     const addToList = async () => {
         try {
             await axios.post('http://localhost:5000/api/user/add', { email, data: movieData })
         } catch (err) {
             console.log(err);
         }
-    }
+    };
 
-    return <Container onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}>
-        <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt='film' />
+    return (
+        <Container onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}>
+            <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`} alt='film' />
 
-        {
-            isHovered && (
-                <div className='hover'>
-                    <div className='image-video-container'>
-                        <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
-                            alt='film'
-                            onClick={() => navigate('/player')}
-                        />
-                        <video src={Mebet} autoPlay loop muted
-                            onClick={() => navigate('/player')} />
-                    </div>
-                    <div className='info-container flex column'>
-                        <h3 className='name' onClick={() => navigate('/player')}>{movieData.name}</h3>
-                        <div className='icons flex j-between'>
-                            <div className='controls flex'>
-                                <IoPlayCircleSharp title='play'
-                                    onClick={() => navigate('/player')}
-                                />
-                                <RiThumbUpFill title='Like' />
-                                <RiThumbDownFill title='Dislike' />
-                                {isliked ? (
-                                    <BsCheck title='Remove From List' />) :
-                                    (<AiOutlinePlus title='Add to my List' onClick={addToList} />
-                                    )}
+            {
+                isHovered && (
+                    <div className='hover'>
+                        <div className='image-video-container'>
+                            <img src={`https://image.tmdb.org/t/p/w500${movieData.image}`}
+                                alt='film'
+                                onClick={() => navigate('/player')}
+                            />
+                            <video src={Mebet} autoPlay loop muted
+                                onClick={() => navigate('/player')} />
+                        </div>
+                        <div className='info-container flex column'>
+                            <h3 className='name' onClick={() => navigate('/player')}>{movieData.name}</h3>
+                            <div className='icons flex j-between'>
+                                <div className='controls flex'>
+                                    <IoPlayCircleSharp title='play'
+                                        onClick={() => navigate('/player')}
+                                    />
+                                    <RiThumbUpFill title='Like' />
+                                    <RiThumbDownFill title='Dislike' />
+                                    {isliked ? (
+                                        <BsCheck title='Remove From List' />) :
+                                        (<AiOutlinePlus title='Add to my List' onClick={addToList} />
+                                        )}
+                                </div>
+                                <div className='info'>
+                                    <BiChevronDown title='More Info' />
+                                </div>
                             </div>
-                            <div className='info'>
-                                <BiChevronDown title='More Info' />
+                            <div className='genres flex'>
+                                <ul className='flex'>{movieData.genres.map((genre) => (
+                                    <li key={genre}>{genre}</li>
+                                ))}</ul>
                             </div>
                         </div>
-                        <div className='genres flex'>
-                            <ul className='flex'>{movieData.genres.map((genre) => (
-                                <li key={genre}>{genre}</li>
-                            ))}</ul>
-                        </div>
                     </div>
-                </div>
-            )
-        }
-    </Container>
-}
+                )
+            }
+        </Container>
+    )
+};
 
 const Container = styled.div`
 max-width: 230px;
@@ -150,4 +154,4 @@ img {
 }
 `;
 
-export default Card
+// export default Card

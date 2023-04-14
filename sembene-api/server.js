@@ -1,27 +1,37 @@
 //IMPORT DEPENDENCIES
-require('dotenv').config();
+const db = require('./config/connection');
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const UserRoutes = require('./routes/UserRoute');
 
+const PORT = process.env.PORT || 5000;
 const app = express();
 
-// app.use('/api/user/UserRoute');
-
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//CONNECT MONGODB
-mongoose.connect(process.env.DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    //LOG EXECUTION & HANDLE ERRORS
-    .then(() => {
-        console.log('Database Connected');
-        app.listen(5000, () => console.log('Server Listening on port 5000'))
-    })
-    .catch((error) => {
-        console.error('Database connection error:', error);
+// app.use('/api/user', UserRoute);
+
+let user = "something";
+console.log(user);
+
+app.post("/api/user/add", async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = new user({ email });
+        await user.add();
+        res.json({ msg: "endpoint works" });
+    } catch (error) {
+        res.status(500).json({ msg: 'Error' })
+        console.log(error)
+    }
+});
+
+db.once('open', () => {
+    app.listen(PORT, () => {
+        console.log(`API server running on port ${PORT}!`);
     });
+});
+
+// app.use('/api/user/UserRoute');

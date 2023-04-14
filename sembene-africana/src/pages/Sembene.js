@@ -50,8 +50,9 @@ export default function Sembene() {
           <div className='buttons flex'>
             <button className='flex j-center a-center' onClick={() => navigate('/player')}>
               <FaPlay /> Play </button>
-            <button className='flex j-center a-center'>
-              <AiOutlineInfoCircle /> Learn More </button>
+            {/* <button className='flex j-center a-center'>
+              <AiOutlineInfoCircle /> Learn More 
+              </button> */}
           </div>
           {/* {genres.map((item, index) => <li key={index}>{item.name}</li>)} */}
         </div>
@@ -102,7 +103,7 @@ button {
   }
   &:nth-of-type(2) {
     background-color: rgba(109, 109 110, 0.7);
-    color: white;
+    color: black;
     svg {
       font-size: 1.8rem;
     }

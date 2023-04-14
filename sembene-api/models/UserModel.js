@@ -7,6 +7,12 @@ const userSchema = new mongoose.Schema({
         unique: true,
         max: 50,
     },
+    // movieLists: [
+    //     {
+    //         type: mongoose.Types.ObjectId,
+    //         ref: 'movieList'
+    //     }
+    // ],
     likedMovies: Array
 });
 

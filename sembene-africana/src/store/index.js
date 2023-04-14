@@ -76,6 +76,13 @@ export const fetchDataByGenre = createAsyncThunk(
     }
 );
 
+export const getUserLikedMovies = createAsyncThunk(
+    'sembene/getLiked', async (email) => {
+        const { data: { movies },
+        } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
+        return movies;
+    });
+
 const SembeneSlice = createSlice({
     name: 'sembene',
     initialState,
@@ -88,6 +95,9 @@ const SembeneSlice = createSlice({
             state.movies = action.payload;
         });
         builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+        builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
     },
