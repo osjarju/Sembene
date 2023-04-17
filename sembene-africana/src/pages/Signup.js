@@ -41,15 +41,6 @@ export default function Signup() {
     };
 
 
-    // onAuthStateChanged(firebaseAuth, (currentUser) => {
-    //     if (currentUser) {
-    //         console.count('Auth is running')
-    //         createUserWithEmail();
-    //         navigate('/');
-    //     }
-
-    // });
-
     const createUserWithEmail = async (email) => {
         try {
             // const { email } = formValues;
@@ -73,9 +64,9 @@ export default function Signup() {
                 <Header login />
                 <div className='body flex column a-center j-center'>
                     <div className='text flex column'>
-                        <h1>Movies Made In Africa</h1>
-                        <h4>Exclusive Content . For everyone</h4>
-                        <h6>Enter your email
+                        <h1>An African Movies Platform</h1>
+                        {/* <h4> Content . For everyone</h4> */}
+                        <h6>Enter your email & be a part of our community
                         </h6>
                     </div>
                     <form>
@@ -123,6 +114,10 @@ position: relative;
             font-size: 2rem;
             h1 {
                 padding: 0 25rem;
+                color: rgb(220, 74, 7)
+            }
+            h6 {
+               color: rgb(220, 74, 7)
             }
         }
         form {

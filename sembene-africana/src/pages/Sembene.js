@@ -3,7 +3,7 @@ import Navbar from '../components/navbar/Navbar';
 import Background from '../assets/Background.jpg';
 // import MovieLogo from '../assets/MovieLogo.jpg'
 import { FaPlay } from 'react-icons/fa';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+// import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -98,6 +98,7 @@ button {
   border: none;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  background-color: rgb(220, 74, 7);
   &:hover{
     opacity: 0.8;
   }

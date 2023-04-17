@@ -70,7 +70,7 @@ export default function Navbar({ isScrolled }) {
 
 const Container = styled.div`
 .scrolled {
-    background-color: orange;
+    background-color: rgb(220, 74, 7);
 }
 nav {
     position: sticky;
@@ -104,7 +104,7 @@ nav {
  .right {
    gap: 1rem;
    button {
-     background-color: transparent:
+     background-color: transparent;
      border: none;
      cursor: pointer;
      &:focus {

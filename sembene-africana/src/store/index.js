@@ -91,6 +91,7 @@ export const removeFromLikedMovies = createAsyncThunk(
         } = await axios.put(`http://localhost:3001/api/user/delete/`, {
             email, movieId,
         });
+        console.log(movies)
         return movies;
     });
 

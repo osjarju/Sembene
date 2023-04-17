@@ -57,7 +57,7 @@ export default function TVShows() {
 
 const Container = styled.div`
 .data {
-    margin-top: 8rem;
+    margin-top: 5rem;
     .not-available {
         text-align: center;
         color: white;

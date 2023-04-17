@@ -91,21 +91,29 @@ module.exports.removeFromLikedMovies = async (req, res) => {
         const { email, movieId } = req.body;
         const user = await User.findOne({ email });
 
-        //DELETE MOVIE IF IN LIST
-        if (user) {
-            const { likedMovies } = user;
-            const movieIndex = likedMovies.findIndex(({ id }) => (id === movieId));
-            if (!movieIndex) res.status(400).send({ msg: 'Movie not found' })
-            likedMovies.splice(movieIndex, 1)
 
-            await User.findByIdAndUpdate(
-                user._id,
-                {
-                    likedMovies,
-                },
-                { new: true }
-            );
+        if (!user) {
+            res.status(400).send({ msg: 'User not found' });
+            return
         }
+
+        //DELETE MOVIE IF IN LIST
+        const { likedMovies } = user;
+        const movieIndex = likedMovies.findIndex(({ id }) => (id === movieId));
+        if (movieIndex < 0) {
+            res.status(400).send({ msg: 'Movie not found' })
+            return
+        }
+        likedMovies.splice(movieIndex, 1)
+
+        await User.findByIdAndUpdate(
+            user._id,
+            {
+                likedMovies,
+            },
+            { new: true }
+        );
+
         return res.json({ msg: 'Movie deleted', movies: likedMovies });
     } catch (err) {
         console.log(err);
