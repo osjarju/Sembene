@@ -76,10 +76,21 @@ export const fetchDataByGenre = createAsyncThunk(
     }
 );
 
+//GET MOVIES LIKED
 export const getUserLikedMovies = createAsyncThunk(
     'sembene/getLiked', async (email) => {
         const { data: { movies },
-        } = await axios.get(`http://localhost:5000/api/user/liked/${email}`);
+        } = await axios.get(`http://localhost:3001/api/user/liked/${email}`);
+        return movies;
+    });
+
+//REMOVE MOVIE FROM LIKED LIST
+export const removeFromLikedMovies = createAsyncThunk(
+    'sembene/deleteLiked', async ({ email, movieId }) => {
+        const { data: { movies },
+        } = await axios.put(`http://localhost:3001/api/user/delete/`, {
+            email, movieId,
+        });
         return movies;
     });
 
@@ -98,6 +109,9 @@ const SembeneSlice = createSlice({
             state.movies = action.payload;
         });
         builder.addCase(getUserLikedMovies.fulfilled, (state, action) => {
+            state.movies = action.payload;
+        });
+        builder.addCase(removeFromLikedMovies.fulfilled, (state, action) => {
             state.movies = action.payload;
         });
     },

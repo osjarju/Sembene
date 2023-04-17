@@ -17,6 +17,7 @@ export default function Movies() {
 
     const genresLoaded = useSelector((state) => state.sembene.genresLoaded);
     const movies = useSelector((state) => state.sembene.movies);
+    console.log(movies)
     const genres = useSelector((state) => state.sembene.genres);
 
     const dispatch = useDispatch();

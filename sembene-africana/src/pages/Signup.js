@@ -27,10 +27,29 @@ export default function Signup() {
     };
 
     onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) navigate('/');
+        if (currentUser) {
+            console.count('Auth is running')
+            createUserWithEmail();
+            navigate('/');
+        }
 
     });
 
+    const createUserWithEmail = async () => {
+        try {
+            const { email } = formValues;
+            await fetch('/api/user', {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({ email }),
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <Container showPassword={showPassword}>
@@ -41,7 +60,7 @@ export default function Signup() {
                     <div className='text flex column'>
                         <h1>Movies Made In Africa</h1>
                         <h4>Exclusive Content . For everyone</h4>
-                        <h6>Enter your email and watch Exclusive Content
+                        <h6>Enter your email
                         </h6>
                     </div>
                     <form>

@@ -10,6 +10,8 @@ import { BiChevronDown } from 'react-icons/bi';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../../utils/firebase-config';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { removeFromLikedMovies } from '../../store/index';
 
 export default function Card({ movieData, isliked = false }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -22,10 +24,27 @@ export default function Card({ movieData, isliked = false }) {
         else navigate('/login');
     });
 
+
+    // //ADD MOVIE TO MY LIST
+    // const addToList = async () => {
+    //     console.log(email)
+    //     try {
+    //         console.log(movieData)
+    //         const { data } = await axios.post('/api/movie/add', { email, data: movieData })
+    //         console.log(data)
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
+
+    const dispatch = useDispatch();
     //ADD MOVIE TO MY LIST
     const addToList = async () => {
+        // console.log(email)
         try {
-            await axios.post('http://localhost:5000/api/user/add', { email, data: movieData })
+            console.log(movieData)
+            await axios.post('/api/user/add', { email, data: movieData })
+            // console.log(data)
         } catch (err) {
             console.log(err);
         }
@@ -57,7 +76,8 @@ export default function Card({ movieData, isliked = false }) {
                                     <RiThumbUpFill title='Like' />
                                     <RiThumbDownFill title='Dislike' />
                                     {isliked ? (
-                                        <BsCheck title='Remove From List' />) :
+                                        <BsCheck title='Remove From List' onClick={() => dispatch(
+                                            removeFromLikedMovies({ movieId: movieData.id, email }))} />) :
                                         (<AiOutlinePlus title='Add to my List' onClick={addToList} />
                                         )}
                                 </div>

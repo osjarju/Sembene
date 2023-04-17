@@ -2,31 +2,19 @@
 const db = require('./config/connection');
 const express = require('express');
 const cors = require('cors');
+// const api = require('./routes')
 
-const PORT = process.env.PORT || 5000;
+const userRoutes = require('./routes/api/UserRoute');
+
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// app.use('/api/user', UserRoute);
-
-let user = "something";
-console.log(user);
-
-app.post("/api/user/add", async (req, res) => {
-    const { email } = req.body;
-
-    try {
-        const user = new user({ email });
-        await user.add();
-        res.json({ msg: "endpoint works" });
-    } catch (error) {
-        res.status(500).json({ msg: 'Error' })
-        console.log(error)
-    }
-});
+// app.use('/api', api);
+app.use('/api/user', userRoutes);
 
 db.once('open', () => {
     app.listen(PORT, () => {
@@ -34,4 +22,3 @@ db.once('open', () => {
     });
 });
 
-// app.use('/api/user/UserRoute');
