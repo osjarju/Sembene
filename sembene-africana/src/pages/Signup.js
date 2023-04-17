@@ -64,7 +64,7 @@ export default function Signup() {
                 <Header login />
                 <div className='body flex column a-center j-center'>
                     <div className='text flex column'>
-                        <h1>An African Movies Platform</h1>
+                        <h1>The African Movie Platform</h1>
                         {/* <h4> Content . For everyone</h4> */}
                         <h6>Enter your email & be a part of our community
                         </h6>
@@ -117,7 +117,7 @@ position: relative;
                 color: rgb(220, 74, 7)
             }
             h6 {
-               color: rgb(220, 74, 7)
+               color: white;
             }
         }
         form {
