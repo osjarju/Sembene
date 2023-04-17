@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { firebaseAuth } from '../utils/firebase-config';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import styled from "styled-components";
 import BgImage from '../components/bgimage/BgImage';
 import Header from '../components/header/Header';
@@ -15,6 +15,20 @@ export default function Signup() {
         password: '',
     });
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, currentUser => {
+            if (currentUser) {
+                console.count("Auth is running")
+                createUserWithEmail(currentUser.email);
+                navigate('/');
+            }
+        });
+        return () => {
+            unsubscribe();
+        }
+    }, [onAuthStateChanged]);
+
+
     //HANDLE SIGN UP
     const handleSignUp = async () => {
         // console.log(formValues);
@@ -26,18 +40,19 @@ export default function Signup() {
         }
     };
 
-    onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) {
-            console.count('Auth is running')
-            createUserWithEmail();
-            navigate('/');
-        }
 
-    });
+    // onAuthStateChanged(firebaseAuth, (currentUser) => {
+    //     if (currentUser) {
+    //         console.count('Auth is running')
+    //         createUserWithEmail();
+    //         navigate('/');
+    //     }
 
-    const createUserWithEmail = async () => {
+    // });
+
+    const createUserWithEmail = async (email) => {
         try {
-            const { email } = formValues;
+            // const { email } = formValues;
             await fetch('/api/user', {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 headers: {

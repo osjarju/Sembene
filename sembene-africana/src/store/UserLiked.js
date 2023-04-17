@@ -18,18 +18,30 @@ export default function UserLiked() {
     console.log(movies)
     console.log(email)
 
-    onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) setEmail(currentUser.email);
-        else navigate('/login');
-    });
+    // onAuthStateChanged(firebaseAuth, (currentUser) => {
+    //     if (currentUser) setEmail(currentUser.email);
+    //     else navigate('/login');
+    // });
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, currentUser => {
+            if (currentUser) {
+                dispatch(getUserLikedMovies(currentUser.email));
+            } else navigate('/login');
+        });
+
+        return () => {
+            unsubscribe();
+        }
+    }, []);
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (email) {
-            dispatch(getUserLikedMovies(email));
-        }
-    }, [email]);
+    // useEffect(() => {
+    //     if (email) {
+    //         dispatch(getUserLikedMovies(email));
+    //     }
+    // }, [email]);
 
     //WINDOW SCROLL FUNCTIONALITY
     window.onscroll = () => {

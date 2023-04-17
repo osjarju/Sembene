@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Mebet from '../../assets/Mebet.mp4';
 import { useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -19,11 +19,18 @@ export default function Card({ movieData, isliked = false }) {
     const navigate = useNavigate();
 
     //IF USER DOES NOT EXIST GO TO LOGIN PAGE
-    onAuthStateChanged(firebaseAuth, (currentUser) => {
-        if (currentUser) setEmail(currentUser.email);
-        else navigate('/login');
-    });
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(firebaseAuth, currentUser => {
+            if (currentUser) {
+                setEmail(currentUser.email)
+            } else navigate('/login');
+        });
+
+        return () => {
+            unsubscribe();
+        }
+    }, []);
 
     // //ADD MOVIE TO MY LIST
     // const addToList = async () => {

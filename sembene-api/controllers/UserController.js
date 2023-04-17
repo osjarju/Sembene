@@ -1,49 +1,49 @@
 const User = require('../models/UserModel');
 
-// module.exports.createUser = async (req, res) => {
-//     try {
-//         const { email } = req.body;
-//         if (email) {
-//             const user = await User.create({ email });
-//             res.json({
-//                 message: "user created succesfully",
-//                 user
-//             })
-//         } else {
-//             res.status(400).json({
-//                 message: "Unable to create an account"
-//             })
-//         }
-//     } catch (error) {
-//         res.status(400).json({
-//             message: "Unable to create an account",
-//             error
-//         })
-//     }
-// };
+module.exports.createUser = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (email) {
+            const user = await User.create({ email });
+            res.json({
+                message: "user created succesfully",
+                user
+            })
+        } else {
+            res.status(400).json({
+                message: "Unable to create an account"
+            })
+        }
+    } catch (error) {
+        res.status(400).json({
+            message: "Unable to create an account",
+            error
+        })
+    }
+};
 
-// module.exports.getUser = async (req, res) => {
-//     try {
-//         const { email } = req.params;
-//         console.log(req.params)
-//         if (email) {
-//             const user = await User.findOne({ email }).populate("likedMovies");
-//             res.json({
-//                 message: "Success",
-//                 user
-//             })
-//         } else {
-//             res.status(400).json({
-//                 message: "Error finding user"
-//             })
-//         }
-//     } catch (error) {
-//         res.status(400).json({
-//             message: "Error finding user",
-//             error
-//         })
-//     }
-// };
+module.exports.getUser = async (req, res) => {
+    try {
+        const { email } = req.params;
+        console.log(req.params)
+        if (email) {
+            const user = await User.findOne({ email }).populate("likedMovies");
+            res.json({
+                message: "Success",
+                user
+            })
+        } else {
+            res.status(400).json({
+                message: "Error finding user"
+            })
+        }
+    } catch (error) {
+        res.status(400).json({
+            message: "Error finding user",
+            error
+        })
+    }
+};
 
 
 
