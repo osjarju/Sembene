@@ -5,6 +5,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(161, 32, 4);
+  color: rgb(0, 0, 0);
+}
 
-  background-color: rgb(255, 94, 0);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.j-between {
+  justify-content: space-between;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+.a-center {
+  align-items: center;
 }
