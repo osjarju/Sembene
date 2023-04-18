@@ -1,0 +1,21 @@
+{
+  "name": "sembene",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd sembene-africana && npm install && npm run build && cd ../sembene-api && npm install",
+    "start": "cd sembene-api && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osjarju/Sembene.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osjarju/Sembene/issues"
+  },
+  "homepage": "https://github.com/osjarju/Sembene#readme"
+}
